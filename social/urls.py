@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import PostListView, PostDetailView, PostEditView, PostDeleteView, CommentDeleteView, ProfileView, \
+from social.views import PostListView, PostDetailView, PostEditView, PostDeleteView, CommentDeleteView, ProfileView, \
     ProfileEditView, AddFollower, RemoveFollower, AddLike, AddDislike, UserSearch, ListFollowers, AddCommentLike, \
-    AddCommentDislike, CommentReplyView
-
+    AddCommentDislike, CommentReplyView, PostNotification, FollowNotification, RemoveNotification, CreateThread, \
+    ListThreads, ThreadView, CreateMessage, ThreadNotification, Explore
 urlpatterns = [
     path('', PostListView.as_view(), name='post-list'),
+    path('explore/', Explore.as_view(), name='explore'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('post/edit/<int:pk>/', PostEditView.as_view(), name='post-edit'),
     path('post/delete/<int:pk>/', PostDeleteView.as_view(), name='post-delete'),
@@ -20,4 +21,12 @@ urlpatterns = [
     path('profile/<int:pk>/followers/add', AddFollower.as_view(), name='add-follower'),
     path('profile/<int:pk>/followers/remove', RemoveFollower.as_view(), name='remove-follower'),
     path('search/', UserSearch.as_view(), name='profile-search'),
+    path('notification/<int:notification_pk>/post/<int:post_pk>', PostNotification.as_view(), name='post-notification'),
+    path('notification/<int:notification_pk>/profile/<int:profile_pk>', FollowNotification.as_view(), name='follow-notification'),
+    path('notification/<int:notification_pk>/thread/<int:object_pk>', ThreadNotification.as_view(), name='thread-notification'),
+    path('notification/delete/<int:notification_pk>', RemoveNotification.as_view(), name='notification-delete'),
+    path('inbox/', ListThreads.as_view(), name='inbox'),
+    path('inbox/create-thread/', CreateThread.as_view(), name='create-thread'),
+    path('inbox/<int:pk>/', ThreadView.as_view(), name='thread'),
+    path('inbox/<int:pk>/create-message/', CreateMessage.as_view(), name='create-message'),
 ]

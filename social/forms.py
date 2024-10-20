@@ -1,5 +1,6 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, MessageModel
+
 
 class PostForm(forms.ModelForm):
     body = forms.CharField(
@@ -24,3 +25,23 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['comment']
+
+class ThreadForm(forms.Form):
+    username = forms.CharField(label='', max_length=100)
+
+class MessageForm(forms.ModelForm):
+    body = forms.CharField(label='', max_length=1000)
+
+    image = forms.ImageField(required=False)
+
+    class Meta:
+        model = MessageModel
+        fields = ['body', 'image']
+
+class ExploreForm(forms.Form):
+    query = forms.CharField(
+        label='',
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Explore tags'
+        })
+    )
