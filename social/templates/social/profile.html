@@ -83,7 +83,12 @@
                         </p>
                     </div>
                 <div class="position-relative">
-                    <p>{{ post.body }}</p>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class="post-image" alt="">
+                    {% endif %}
+                    <div class="body">
+                        <p>{{ post.body }}</p>
+                    </div>
                     <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
                 </div>
 
