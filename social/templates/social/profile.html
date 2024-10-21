@@ -54,6 +54,16 @@
                     <p>Birthday: {{ profile.birth_date }}</p>
                 {% endif %}
 
+                {% if profile.audio %}
+                    <p>Music:
+                        <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
+                            <audio style="margin: 25px;" controls autoplay loop>
+                                <source src="{{ profile.audio.url }}">
+                            </audio>
+                        </div>
+                    </p>
+                {% endif %}
+
                  {% if user == request.user %}
                     {% else %}
                     {% if is_following %}

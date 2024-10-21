@@ -44,25 +44,59 @@
         </div>
         {% endif %}
 
-        <!-- Theme selector icon -->
-        <ion-icon name="color-palette-outline" id="theme-icon" style="cursor: pointer;"></ion-icon>
+        <a class="navbar-brand">
+            <i class="fas fa-palette" id="theme-icon" style="cursor: pointer; margin-left: 10px;"></i>
+        </a>
 
-        <!-- Speech bubble for theme options -->
-        <div class="speech-bubble" id="speech-bubble" style="display: none;">
-          <p>Select a theme:</p>
-          <button id="dark-mode">Dark Mode</button>
-          <button id="light-mode">Light Mode</button>
-          <button id="blue-theme">Blue Theme</button>
-          <button id="green-theme">Green Theme</button>
-          <button id="red-theme">Red Theme</button>
-          <button id="yellow-theme">Yellow Theme</button>
-          <button id="purple-theme">Purple Theme</button>
-          <button id="orange-theme">Orange Theme</button>
-          <button id="pink-theme">Pink Theme</button>
-          <button id="grey-theme">Grey Theme</button>
-          <button id="brown-theme">Brown Theme</button>
+        <div class="speech-bubble" id="speech-bubble" style="display: none; position: absolute; z-index: 1000;">
+          <p style="color: black;">Select a theme:</p>
+          <div style="display: flex; flex-direction: column;">
+           <button class="theme-button" data-theme="dark">Dark Theme</button>
+            <button class="theme-button" data-theme="light">Light Theme</button>
+            <button class="theme-button" data-theme="blue">Blue Theme</button>
+            <button class="theme-button" data-theme="green">Green Theme</button>
+            <button class="theme-button" data-theme="red">Red Theme</button>
+            <button class="theme-button" data-theme="yellow">Yellow Theme</button>
+            <button class="theme-button" data-theme="purple">Purple Theme</button>
+            <button class="theme-button" data-theme="orange">Orange Theme</button>
+            <button class="theme-button" data-theme="pink">Pink Theme</button>
+            <button class="theme-button" data-theme="grey">Grey Theme</button>
+            <button class="theme-button" data-theme="brown">Brown Theme</button>
+
+          </div>
         </div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const themeIcon = document.getElementById('theme-icon');
+            const speechBubble = document.getElementById('speech-bubble');
+
+            let isSpeechBubbleVisible = false;
+
+            themeIcon.addEventListener('click', () => {
+              if (!isSpeechBubbleVisible) {
+                speechBubble.style.position = 'fixed';
+
+                const rect = themeIcon.getBoundingClientRect();
+                speechBubble.style.top = `${rect.top + rect.height}px`;
+                speechBubble.style.right = '10px';
+
+                speechBubble.style.display = 'block';
+
+                speechBubble.style.width = '200px';
+
+                isSpeechBubbleVisible = true;
+              } else {
+                speechBubble.style.display = 'none';
+                isSpeechBubbleVisible = false;
+              }
+            });
+
+          });
+        </script>
       </div>
     </div>
+
+
   </nav>
 </div>
